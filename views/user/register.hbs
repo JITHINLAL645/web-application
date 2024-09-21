@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="/style/userlogin.css">
+
+<body>
+    <div id="particles-js" class="snow"></div>
+
+    <main>
+        <!-- Left Side with image background -->
+        <div class="left-side"></div>
+
+        <!-- Right Side: Form Section -->
+        <div class="right-side">
+            <form method="post" action="/user/register">
+                <!-- Hidden field for error messages -->
+                <input type="text" value="{{{message}}}" id="message" name="message" hidden>
+
+                <!-- Button Group for Google and Apple Sign-in -->
+                <div class="btn-group">
+                    <button type="button" class="btn">
+                        <img class="logo"
+                            src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/d1c98974-c62d-4071-8bd2-ab859fc5f4e9"
+                            alt="" />
+                        <span>Sign in with Google</span>
+                    </button>
+                    <button type="button" class="btn">
+                        <img class="logo"
+                            src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/59c1561b-8152-4d05-b617-0680a7629a0e"
+                            alt="" />
+                        <span>Sign in with Apple</span>
+                    </button>
+                </div>
+
+                <!-- OR Separator -->
+                <div class="or">OR</div>
+
+                <!-- Email Input -->
+                <label for="email">Email</label>
+                <input id="email" type="text" placeholder="Enter Email" name="email" />
+
+                <!-- Password Input -->
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="Enter Password" name="password" />
+
+                <!-- Confirm Password Input -->
+                <label for="confirmPassword">Confirm Password</label>
+                <input id="confirmPassword" type="password" placeholder="Confirm Password" name="confirmPassword" />
+
+                <!-- Submit Button -->
+                <button type="submit" class="login-btn">Sign in</button>
+
+                <!-- Additional Links -->
+                <div class="links">
+                    <a href="#">Forgot password?</a>
+                    <a href="#">Don't have an account?</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Form validation script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('form').addEventListener('submit', formValidate);
+        });
+        const message = document.getElementById('message').value;
+
+        if (message) {
+            console.log(message);
+            swal(message);
+        }
+
+        function formValidate(e) {
+            e.preventDefault();
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (email === "" || password === "" || confirmPassword === "") {
+                swal("All fields are required");
+                return false;
+            } else if (password !== confirmPassword) {
+                swal("Passwords do not match");
+                return false;
+            }
+
+            e.target.submit();
+            return true;
+        }
+    </script>
+</body>
